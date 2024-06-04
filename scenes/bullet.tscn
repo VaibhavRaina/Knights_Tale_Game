@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxctqbxbyttl4"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_hv1il"]
+[ext_resource type="Texture2D" uid="uid://dqqq6wwv7gdbo" path="res://assests/sprites/arm_projectile_glowing.png" id="2_mwdei"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7r08m"]
+size = Vector2(37, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k717e"]
+atlas = ExtResource("2_mwdei")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7plu"]
+atlas = ExtResource("2_mwdei")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yestv"]
+atlas = ExtResource("2_mwdei")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2kxr"]
+atlas = ExtResource("2_mwdei")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk82o"]
+atlas = ExtResource("2_mwdei")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6seb4"]
+atlas = ExtResource("2_mwdei")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vs2kc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k717e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7plu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yestv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2kxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yk82o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6seb4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="bullet" type="Area2D"]
+script = ExtResource("1_hv1il")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(27.5, -13)
+shape = SubResource("RectangleShape2D_7r08m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vs2kc")
+autoplay = "default"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
