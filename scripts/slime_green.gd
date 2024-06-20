@@ -5,6 +5,7 @@ var direction = 1
 var pushback_force = Vector2.ZERO
 var pushback_duration = 0.2
 var pushback_timer = 0.0
+@onready var enemy_hit_box = $EnemyHitBox
 
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_left = $RayCastLeft
@@ -48,6 +49,7 @@ func take_damage(damage):
 	health_bar._set_health(health)
 
 	if health <= 0:
+		SPEED=0
 		hurt_box.collision_mask = 0
 		animated_sprite_2d.play("dead")
 		timer.start()
@@ -61,7 +63,7 @@ func apply_pushback(impulse: Vector2):
 	pushback_timer = pushback_duration
 
 func _on_timer_timeout():
-
+	
 	queue_free()
 	hurt_box.collision_mask = 2
 

@@ -1,8 +1,8 @@
 class_name HitBox
 extends Area2D
 @export var damage={
-	"lightDamage":2,
-	"heavyDamage":4
+	"lightDamage":3,
+	"heavyDamage":5
 }
 
 

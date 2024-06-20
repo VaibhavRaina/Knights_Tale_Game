@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://blewnrbl5xx8n"]
+[gd_scene load_steps=35 format=3 uid="uid://blewnrbl5xx8n"]
 
 [ext_resource type="Texture2D" uid="uid://bbijqe0g7qxct" path="res://assests/sprites/golem.png" id="1_ckrv5"]
 [ext_resource type="Script" path="res://scripts/golem_boss.gd" id="1_nf63j"]
@@ -16,6 +16,11 @@
 [ext_resource type="Script" path="res://scenes/ArmourBuff.gd" id="10_tfqgu"]
 [ext_resource type="Script" path="res://scripts/Death.gd" id="12_rcy8r"]
 [ext_resource type="Script" path="res://scripts/HurtBox.gd" id="15_oofij"]
+[ext_resource type="Script" path="res://scripts/ArmorBuff.gd" id="15_sjosb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_42h2a"]
+radius = 11.0
+height = 548.0
 
 [sub_resource type="Animation" id="Animation_8svi3"]
 length = 0.001
@@ -74,6 +79,18 @@ tracks/4/path = NodePath("FiniteStateMachine/MeleeAttack/EnemyHitBox/Meele2:disa
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pivot/EnemyHitBox/LaserAttack:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -254,6 +271,18 @@ tracks/1/keys = {
 "method": &"set_target"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/EnemyHitBox/LaserAttack:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.31721, 1.375, 1.5, 1.625, 1.75, 1.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, false, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_0ab0c"]
 resource_name = "laser_cast"
@@ -388,15 +417,19 @@ height = 48.0
 radius = 54.0093
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yma43"]
-radius = 7.0
+radius = 15.0
+height = 42.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y504g"]
 radius = 24.0
 height = 56.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lnbjn"]
+radius = 9.0
+
 [node name="GolemBoss" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 3
 script = ExtResource("1_nf63j")
 
 [node name="debug" type="Label" parent="."]
@@ -420,6 +453,16 @@ position = Vector2(210, 21)
 scale = Vector2(2.12792, 1.2225)
 texture = ExtResource("2_yayic")
 vframes = 15
+
+[node name="EnemyHitBox" type="Area2D" parent="Pivot"]
+position = Vector2(-2, 17)
+script = ExtResource("9_f25p8")
+
+[node name="LaserAttack" type="CollisionShape2D" parent="Pivot/EnemyHitBox"]
+position = Vector2(263, -17)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_42h2a")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -455,12 +498,12 @@ script = ExtResource("7_2v5wd")
 script = ExtResource("9_f25p8")
 
 [node name="Meele" type="CollisionShape2D" parent="FiniteStateMachine/MeleeAttack/EnemyHitBox"]
-position = Vector2(27, 5)
+position = Vector2(16, 6)
 shape = SubResource("CapsuleShape2D_yma43")
 disabled = true
 
 [node name="Meele2" type="CollisionShape2D" parent="FiniteStateMachine/MeleeAttack/EnemyHitBox"]
-position = Vector2(-27, 5)
+position = Vector2(-14, 5)
 shape = SubResource("CapsuleShape2D_yma43")
 disabled = true
 
@@ -479,6 +522,9 @@ script = ExtResource("12_rcy8r")
 [node name="Follow" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("6_eci7e")
 
+[node name="ArmorBuff" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("15_sjosb")
+
 [node name="HealthBar" parent="." instance=ExtResource("3_gwpkc")]
 offset_left = -100.0
 offset_top = -34.0
@@ -492,7 +538,15 @@ script = ExtResource("15_oofij")
 position = Vector2(1, -3)
 shape = SubResource("CapsuleShape2D_y504g")
 
-[node name="DeathTimer" type="Timer" parent="."]
+[node name="BuffTimer" type="Timer" parent="."]
 
+[node name="EnemyHitBox" type="Area2D" parent="."]
+script = ExtResource("9_f25p8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox"]
+position = Vector2(-1, 9)
+shape = SubResource("CircleShape2D_lnbjn")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/Idle" method="_on_player_detection_body_entered"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="BuffTimer" to="." method="_on_buff_timer_timeout"]

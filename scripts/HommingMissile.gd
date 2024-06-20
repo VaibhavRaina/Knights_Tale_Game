@@ -12,7 +12,7 @@ func enter():
  
 func shoot():
 	var bullet = bullet_node.instantiate()
-	bullet.position = owner.position
+	bullet.position = Vector2(owner.position.x, owner.position.y)
 	get_tree().current_scene.add_child(bullet)
  
 func transition():

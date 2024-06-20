@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://c22mpex2bnyff"]
+
+[ext_resource type="Texture2D" uid="uid://0pasb87plcih" path="res://assests/sprites/flag animation.png" id="1_lvjae"]
+[ext_resource type="Script" path="res://scripts/CheckPointFlag.gd" id="1_ukurn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3ydv"]
+atlas = ExtResource("1_lvjae")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhp4l"]
+atlas = ExtResource("1_lvjae")
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx6vc"]
+atlas = ExtResource("1_lvjae")
+region = Rect2(120, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8jq1"]
+atlas = ExtResource("1_lvjae")
+region = Rect2(180, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgp4x"]
+atlas = ExtResource("1_lvjae")
+region = Rect2(240, 0, 60, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ndhr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3ydv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhp4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx6vc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8jq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgp4x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u70ps"]
+size = Vector2(21, 34.5)
+
+[node name="CheckPoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ukurn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(13, -19)
+scale = Vector2(0.591667, 0.675)
+sprite_frames = SubResource("SpriteFrames_4ndhr")
+autoplay = "default"
+frame_progress = 0.903973
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.5, -18)
+shape = SubResource("RectangleShape2D_u70ps")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

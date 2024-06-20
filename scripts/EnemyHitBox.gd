@@ -1,14 +1,16 @@
 class_name EnemyHitBox
 extends Area2D
 
-@onready var animation_player_golem = $"../../../AnimationPlayer"
+
 
 @export var damage={
-	"slime_damage":5,
+	"enemy_damage":{
+		"touch_damage":10
+	},
 	 "golem_damage":{
-		"meele_damage":5,
-		"laser_damage":10,
-		"missile_damgae":8
+		"meele_damage":15,
+		"laser_damage":20,
+		"missile_damgae":10
 	}
 }
 

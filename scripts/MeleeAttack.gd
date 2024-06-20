@@ -1,5 +1,5 @@
 extends State
-@onready var meele = $EnemyHitBox/Meele
+
 
 
 func enter():

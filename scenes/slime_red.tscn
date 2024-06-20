@@ -164,7 +164,6 @@ target_position = Vector2(-11, 0)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_sbmla")
-animation = &"hit"
 autoplay = "default"
 
 [node name="HealthBar" parent="." instance=ExtResource("4_yqmhi")]

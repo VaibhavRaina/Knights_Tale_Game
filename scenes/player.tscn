@@ -1,11 +1,13 @@
-[gd_scene load_steps=66 format=3 uid="uid://bncgefqa34vn5"]
+[gd_scene load_steps=69 format=3 uid="uid://bncgefqa34vn5"]
 
 [ext_resource type="Texture2D" uid="uid://yh73maj3jv86" path="res://assests/sprites/knight.png" id="1_akhok"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ua5nl"]
 [ext_resource type="PackedScene" uid="uid://bjv8tlexx0jag" path="res://scenes/healthbar.tscn" id="3_bhsc4"]
 [ext_resource type="Texture2D" uid="uid://c2bi4c7vt6tpr" path="res://assests/sprites/excalibur_.png" id="3_ll500"]
 [ext_resource type="Script" path="res://scripts/HitBox.gd" id="5_sb0qh"]
+[ext_resource type="Script" path="res://scripts/PlayerKillZone.gd" id="7_axc45"]
 [ext_resource type="Script" path="res://scripts/PlayerDamage.gd" id="7_yhub1"]
+[ext_resource type="PackedScene" uid="uid://b8ojarm3vxlg2" path="res://scenes/MobileControls.tscn" id="8_hkhc8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dh3w0"]
 atlas = ExtResource("1_akhok")
@@ -192,7 +194,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 3.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -218,10 +220,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_67bgr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxwea")
 }],
-"loop": true,
+"loop": false,
 "name": &"dodge",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -244,7 +249,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hit",
-"speed": 10.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -466,13 +471,16 @@ animations = [{
 size = Vector2(14, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rxurn"]
-size = Vector2(13, 19)
+size = Vector2(13, 18.5)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_1sheh"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D" groups=["players"]]
 collision_layer = 2
 script = ExtResource("1_ua5nl")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="JumpTimer" type="Timer" parent="."]
 wait_time = 0.106
 one_shot = true
 
@@ -481,6 +489,8 @@ position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_vylop")
 animation = &"hit"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -492,7 +502,8 @@ offset_top = -27.0
 offset_right = 19.0
 offset_bottom = -24.0
 
-[node name="Timer2" type="Timer" parent="."]
+[node name="RollTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="AttackAnimation" type="AnimatedSprite2D" parent="."]
@@ -503,6 +514,8 @@ rotation = 0.970403
 scale = Vector2(0.592895, 1.1635)
 sprite_frames = SubResource("SpriteFrames_83ddo")
 animation = &"attack2"
+frame = 10
+frame_progress = 1.0
 
 [node name="HitBox" type="Area2D" parent="."]
 script = ExtResource("5_sb0qh")
@@ -516,19 +529,38 @@ disabled = true
 script = ExtResource("7_yhub1")
 
 [node name="HurtArea" type="CollisionShape2D" parent="PlayerDamage"]
-position = Vector2(-1, -10)
+position = Vector2(-0.5, -9.75)
 shape = SubResource("RectangleShape2D_rxurn")
 
 [node name="DeathTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.662
 one_shot = true
 
 [node name="HitTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[node name="PlayerKillZone" type="Area2D" parent="."]
+top_level = true
+collision_mask = 2
+script = ExtResource("7_axc45")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerKillZone"]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_1sheh")
+disabled = true
+
+[node name="Timer" type="Timer" parent="PlayerKillZone"]
+wait_time = 0.52
+one_shot = true
+
+[node name="MobileControls" parent="." instance=ExtResource("8_hkhc8")]
+
+[connection signal="player_death" from="." to="PlayerKillZone" method="_on_player_player_death"]
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
 [connection signal="animation_finished" from="AttackAnimation" to="." method="_on_attack_animation_animation_finished"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]
+[connection signal="body_entered" from="PlayerKillZone" to="PlayerKillZone" method="_on_body_entered"]
+[connection signal="timeout" from="PlayerKillZone/Timer" to="PlayerKillZone" method="_on_timer_timeout"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi2qmdd77k8rf"]
+
+[ext_resource type="Texture2D" uid="uid://d1kdtkwrin5gn" path="res://assests/sprites/platforms.png" id="1_5ykuc"]
+[ext_resource type="Script" path="res://scripts/automatic_platform_small.gd" id="1_eh575"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fj5a"]
+size = Vector2(14, 8)
+
+[node name="AutomaticPlatformSmall" type="AnimatableBody2D"]
+collision_mask = 0
+script = ExtResource("1_eh575")
+
+[node name="RayRight" type="RayCast2D" parent="."]
+target_position = Vector2(18, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-16, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5ykuc")
+region_enabled = true
+region_rect = Rect2(0, 32.1066, 16.0512, 8.51323)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1fj5a")
+one_way_collision = true

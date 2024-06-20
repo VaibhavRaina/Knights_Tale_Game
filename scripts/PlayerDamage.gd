@@ -7,9 +7,11 @@ func _init() -> void:
 func _ready() -> void:
 	connect("area_entered", self._on_area_entered)
 
-func _on_area_entered(Ehitbox: EnemyHitBox) -> void:
-	if Ehitbox == null:
-		return
-	if owner.has_method("take_damage"):
-		owner.take_damage(Ehitbox.damage)
-	
+func _on_area_entered(area: Area2D) -> void:
+	# Check if the area is of type EnemyHitBox
+	if area is EnemyHitBox:
+		var Ehitbox = area as EnemyHitBox
+		if Ehitbox == null:
+			return
+		if owner.has_method("take_damage"):
+			owner.take_damage(Ehitbox.damage)

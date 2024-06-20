@@ -6,7 +6,7 @@ var acceleration:Vector2=Vector2.ZERO
 var velocity:Vector2=Vector2.ZERO
 
 func _physics_process(delta):
-	acceleration=(Vector2(player.position.x, player.position.y - 20)-position).normalized()*700
+	acceleration=(Vector2(player.position.x, player.position.y-10)-position).normalized()*700
 	velocity += acceleration * delta
 	rotation = velocity.angle()
  
@@ -15,5 +15,5 @@ func _physics_process(delta):
 	position += velocity * delta
 
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	queue_free()
