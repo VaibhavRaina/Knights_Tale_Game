@@ -13,7 +13,7 @@ func exit():
 func transition():
 	var distance = owner.direction.length()
  
-	if distance <18:
+	if distance <25:
 		get_parent().change_state("Attack")	
 	#elif distance>80:
 		#var chance=randi()%2

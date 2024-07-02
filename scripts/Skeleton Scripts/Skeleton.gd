@@ -6,7 +6,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var finite_state_machine = $FiniteStateMachine
 @onready var health_bar = $HealthBar
 @onready var hurt_box = $HurtBox
-
+const GRAVITY = 200.0
 
 
 

@@ -268,7 +268,7 @@ animations = [{
 radius = 46.2709
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_amrx7"]
-radius = 3.0
+radius = 7.0
 height = 20.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0rhxa"]
@@ -390,7 +390,7 @@ offset_bottom = -31.0
 script = ExtResource("11_q5hf3")
 
 [node name="EnemyHitBox" type="CollisionShape2D" parent="EnemyHitBox"]
-position = Vector2(-13, -12)
+position = Vector2(-12, -12)
 shape = SubResource("CapsuleShape2D_amrx7")
 disabled = true
 

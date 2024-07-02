@@ -428,8 +428,9 @@ height = 56.0
 radius = 9.0
 
 [node name="GolemBoss" type="CharacterBody2D"]
+position = Vector2(1, 1)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 0
 script = ExtResource("1_nf63j")
 
 [node name="debug" type="Label" parent="."]
