@@ -61,7 +61,7 @@ As this project is exclusively authored and crafted by me, I am not currently ac
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE). However, this game's scripts and content are © 2024 Vaibhav Raina. Unauthorized use or distribution of the game is prohibited.
+This project is licensed under the [MIT License](LICENSE). Unauthorized use or distribution of the game is prohibited.
 
 ## Author
 
