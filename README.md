@@ -67,7 +67,7 @@ This project is licensed under the [MIT License](LICENSE). However, this game's 
 
 **[Your Name]**  
 *Email:* [vaibhavraina12345@gmail.com]  
-*GitHub:* [VaibhavRaina](https://github.com/yourusername)  
+*GitHub:* [VaibhavRaina](https://github.com/VaibhavRaina)  
 
 Knight's Tale is a personal project, and all rights to the game are reserved by the author(vaibhavraina12345@gmail.com).
 
