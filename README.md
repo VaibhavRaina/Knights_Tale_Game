@@ -1,4 +1,4 @@
-
+# Play Game at - https://vaibhav-raina.itch.io/knights-tale
 # Knight's Tale
 
 **Knight's Tale** is a handcrafted action-adventure game developed using the Godot Engine. Embark on an epic journey as a brave knight, battling foes, exploring diverse environments, and uncovering the mysteries of the realm.
