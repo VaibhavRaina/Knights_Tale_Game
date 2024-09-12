@@ -16,8 +16,3 @@ var player_entered:bool=false:
 func transition():
 	if player_entered==false:
 		get_parent().change_state("Follow")
-
-
-
-
-

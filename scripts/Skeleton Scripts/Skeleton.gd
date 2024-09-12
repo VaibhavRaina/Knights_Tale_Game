@@ -55,6 +55,3 @@ func take_damage(damage):
 		
 func apply_pushback(_impulse):
 	pass
-
-
-

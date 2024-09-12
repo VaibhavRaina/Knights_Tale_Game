@@ -77,7 +77,7 @@ func _physics_process(delta):
 
 	# State management and prioritization
 	if is_on_floor():
-		if Input.is_action_just_pressed("roll"):
+		if Input.is_action_just_pressed("roll") and direction!=0:
 			current_state = "dodge"
 			SPEED = ROLL_SPEED
 			animated_sprite_2d.play("dodge")
@@ -157,5 +157,3 @@ func _on_hit_timer_timeout():
 func _on_jump_timer_timeout():
 	if current_state != "dodge":
 		animated_sprite_2d.play("run")
-
-

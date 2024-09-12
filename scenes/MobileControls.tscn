@@ -6,41 +6,39 @@
 [ext_resource type="Texture2D" uid="uid://qga3lkvcqka0" path="res://assests/pngs/HeavyAttack.png" id="4_h0yc1"]
 
 [node name="MobileControls" type="CanvasLayer"]
+offset = Vector2(900, 700)
+transform = Transform2D(1, 0, 0, 1, 900, 700)
 
 [node name="Right" type="TouchScreenButton" parent="."]
-position = Vector2(216, 528)
-scale = Vector2(1, 0.858)
+position = Vector2(-740, -188)
 texture_normal = ExtResource("1_rkesa")
 action = "move_right"
 
 [node name="Left" type="TouchScreenButton" parent="."]
-position = Vector2(153, 638)
+position = Vector2(-772, -60)
 rotation = -3.14159
-scale = Vector2(1, 0.852)
 texture_normal = ExtResource("1_rkesa")
 action = "move_left"
 
 [node name="Jump" type="TouchScreenButton" parent="."]
-position = Vector2(104, 544)
+position = Vector2(-188, -60)
 rotation = -1.5708
-scale = Vector2(0.916384, 1.20654)
 texture_normal = ExtResource("1_rkesa")
 action = "jump"
 
 [node name="Roll" type="TouchScreenButton" parent="."]
-position = Vector2(736, 520)
-scale = Vector2(0.946, 1)
+position = Vector2(-36, -188)
 texture_normal = ExtResource("2_3xrwl")
 action = "roll"
 
 [node name="LightAttack" type="TouchScreenButton" parent="."]
-position = Vector2(880, 528)
-scale = Vector2(0.15, 0.14)
+position = Vector2(116, -180)
+scale = Vector2(0.15, 0.15)
 texture_normal = ExtResource("3_rvj2f")
 action = "attack1"
 
 [node name="HeavyAttack" type="TouchScreenButton" parent="."]
-position = Vector2(1024, 528)
-scale = Vector2(0.15, 0.14)
+position = Vector2(60, -316)
+scale = Vector2(0.15, 0.15)
 texture_normal = ExtResource("4_h0yc1")
 action = "attack2"

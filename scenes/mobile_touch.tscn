@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://xv6efig8j6lg"]
+
+[node name="MobileTouch" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

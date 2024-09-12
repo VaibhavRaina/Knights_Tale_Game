@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bncgefqa34vn5"]
+[gd_scene load_steps=70 format=3 uid="uid://bncgefqa34vn5"]
 
 [ext_resource type="Texture2D" uid="uid://yh73maj3jv86" path="res://assests/sprites/knight.png" id="1_akhok"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ua5nl"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/PlayerKillZone.gd" id="7_axc45"]
 [ext_resource type="Script" path="res://scripts/PlayerDamage.gd" id="7_yhub1"]
 [ext_resource type="PackedScene" uid="uid://b8ojarm3vxlg2" path="res://scenes/MobileControls.tscn" id="8_hkhc8"]
+[ext_resource type="PackedScene" uid="uid://cnyiyrncnexkd" path="res://scenes/music.tscn" id="9_y4p0m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dh3w0"]
 atlas = ExtResource("1_akhok")
@@ -555,6 +556,8 @@ wait_time = 0.52
 one_shot = true
 
 [node name="MobileControls" parent="." instance=ExtResource("8_hkhc8")]
+
+[node name="Music" parent="." instance=ExtResource("9_y4p0m")]
 
 [connection signal="player_death" from="." to="PlayerKillZone" method="_on_player_player_death"]
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
